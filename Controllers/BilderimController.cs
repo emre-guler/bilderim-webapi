@@ -601,7 +601,7 @@ namespace BilderimApp_WebApi.Controllers
             bool validToken = BCrypt.Net.BCrypt.Verify(token, profile.UserToken);
             if(validToken)
             {
-                var usernameControl = db.Users.Where(x => x.Username == profile.UserName || x.PhoneNumber == profile.PhoneNumber).FirstOrDefault();
+                var usernameControl = db.Users.Where(x => profile.UserID != x.ID && (x.Username == profile.UserName || x.PhoneNumber == profile.PhoneNumber)).FirstOrDefault();
                 if(usernameControl == null)
                 {
                     userTokenDB.Username = profile.UserName;
